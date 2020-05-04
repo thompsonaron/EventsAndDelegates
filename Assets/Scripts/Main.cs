@@ -7,38 +7,25 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     /// <summary>
-    /// Create a delegate of type void that calculates the sum of two numbers. use a lambda to avoid having a dedicated Method
+    /// Create a delegate of type void that has no parameters and returns the gameObjects name
     /// </summary>
 
 
-    //public Func<int, int, int> Sum;
-    //private void Start()
-    //{
-    //    Sum = (num1, num2) => (num1 + num2);
-    //}
-
-    public Action<int, int> Sum;
-
-    StringBuilder sb = new StringBuilder();
+    public Action onGetName;
 
     private void Start()
     {
-        //Sum = CalculateSum;
-
-        Sum = (a, b) => {
-            var totall = a + b;
-            if (totall < 100)
-            {
-                Debug.Log("Total is less than 100");
-            }
-            sb.Append("Total: ");
-            sb.Append(totall);
+        // Short w/o StringBuilder
+        //onGetName = () => Debug.Log("Name: " + gameObject.name);
+        // W StringBuilder
+        onGetName = () =>
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Name: ");
+            sb.Append(gameObject.name);
             Debug.Log(sb.ToString());
         };
 
-        Sum(5, 2);
+        onGetName?.Invoke();
     }
-
-
-
 }
