@@ -7,25 +7,25 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     /// <summary>
-    /// Create a delegate of type void that has no parameters and returns the gameObjects name
+    /// Create a delegate of type int that returns the length of the gameObjects name
     /// </summary>
 
-
-    public Action onGetName;
+    public Func<int> onGetName;
 
     private void Start()
     {
-        // Short w/o StringBuilder
-        //onGetName = () => Debug.Log("Name: " + gameObject.name);
-        // W StringBuilder
-        onGetName = () =>
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Name: ");
-            sb.Append(gameObject.name);
-            Debug.Log(sb.ToString());
-        };
+        // NON LAMBDA
+        //onGetName = GetName;
+        onGetName = () => this.gameObject.name.Length;
 
-        onGetName?.Invoke();
+        int charCount = onGetName();
+
+        Debug.Log(charCount);
     }
+
+    // FOR non lambda
+    //int GetName()
+    //{
+    //    return this.gameObject.name.Length;
+    //}
 }
