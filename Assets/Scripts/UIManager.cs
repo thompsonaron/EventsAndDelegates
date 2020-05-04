@@ -6,25 +6,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public int deathCount;
-    public Text deathCountText;
-
-    public void UpdateDeathCount()
+    public void UpdateHealth(int health)
     {
         StringBuilder sb = new StringBuilder();
-        deathCount++;
-        sb.Append("Death Count: ");
-        sb.Append(deathCount);
-        deathCountText.text = sb.ToString();
+        sb.Append("Current health: ");
+        sb.Append(health);
+
+        Debug.Log(sb.ToString());
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
-        Player.onDeath += UpdateDeathCount;
-    }
-
-    private void OnDisable()
-    {
-        Player.onDeath -= UpdateDeathCount;
+        Player.OnDamageReceived += UpdateHealth;
     }
 }
