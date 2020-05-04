@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class CubeScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Main.onClick += TurnRed;
+        Main.onTeleport += ChangePosition;
     }
 
-    public void TurnRed()
+    public void ChangePosition(Vector3 pos)
     {
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        this.transform.position = pos;
     }
 
+    // It is IMPORTANT to DEREGISTER the methods that register
     private void OnDisable()
     {
-        Main.onClick -= TurnRed;
+        Main.onTeleport -= ChangePosition;
     }
 }
