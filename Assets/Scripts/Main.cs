@@ -1,30 +1,44 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Main : MonoBehaviour
 {
+    /// <summary>
+    /// Create a delegate of type void that calculates the sum of two numbers. use a lambda to avoid having a dedicated Method
+    /// </summary>
 
 
-    // passing string value, returning int value
-    public Func<string, int> CharacterLength;
-
-    void Start()
-    {
-        // LAMBDA - passing in a parameter and "go to" line I guess?
-        // it is same as a commented out method underneath
-        // (name) is a parameter which I am sending and name.Length is what I am returning
-        CharacterLength = (name) => name.Length;
-
-        int count = CharacterLength("Jonneh Bravo");
-
-        Debug.Log(count);
-    }
-    
-    //int GetCharacters(string name)
+    //public Func<int, int, int> Sum;
+    //private void Start()
     //{
-    //    return name.Length;
+    //    Sum = (num1, num2) => (num1 + num2);
     //}
+
+    public Action<int, int> Sum;
+
+    StringBuilder sb = new StringBuilder();
+
+    private void Start()
+    {
+        //Sum = CalculateSum;
+
+        Sum = (a, b) => {
+            var totall = a + b;
+            if (totall < 100)
+            {
+                Debug.Log("Total is less than 100");
+            }
+            sb.Append("Total: ");
+            sb.Append(totall);
+            Debug.Log(sb.ToString());
+        };
+
+        Sum(5, 2);
+    }
+
+
 
 }
