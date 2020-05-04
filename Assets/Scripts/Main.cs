@@ -7,34 +7,24 @@ using UnityEngine;
 public class Main : MonoBehaviour
 {
     /// <summary>
-    /// Create a delegate of type int that takes 2 numbers as a parameter and adds the sum
+    /// Simple callback system - basically injecting code
     /// </summary>
 
-    //  first int is in (num1), second int is allso in (num2), third int is out (num1 + num2) in this case
-    public Func<int, int, int> onCalcSum;
 
     private void Start()
     {
-        // short
-        //onCalcSum = (num1, num2) => num1 + num2;
-        onCalcSum = (num1, num2) =>
+        StartCoroutine(MyRoutine(() =>
         {
-            // logic
-            // logic
-            // logic
-            return num1 + num2;
-        };
-
-        int result = onCalcSum(3, 5);
-        StringBuilder sb = new StringBuilder();
-        sb.Append("Result: ");
-        sb.Append(result);
-        Debug.Log(sb.ToString());
+            Debug.Log("The routine has finished!");
+            Debug.Log("Wow this is cool!");
+        }));
     }
 
-    // non lambda
-    //int CalcSum(int a, int b)
-    //{
-    //    return a + b;
-    //}
+    // Action onComplete = null makes it (variable) optional
+    private IEnumerator MyRoutine(Action onComplete = null)
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        onComplete?.Invoke();
+    }
 }
