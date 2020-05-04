@@ -5,23 +5,26 @@ using UnityEngine;
 
 public class Main : MonoBehaviour
 {
-    // create a program that takes in a string and returns the length of it (how many characters)
-    //public delegate int CharacterLength(string text);
+
 
     // passing string value, returning int value
     public Func<string, int> CharacterLength;
 
     void Start()
     {
-        CharacterLength = GetCharacters;
+        // LAMBDA - passing in a parameter and "go to" line I guess?
+        // it is same as a commented out method underneath
+        // (name) is a parameter which I am sending and name.Length is what I am returning
+        CharacterLength = (name) => name.Length;
 
-        int count = CharacterLength("Johnny");
+        int count = CharacterLength("Jonneh Bravo");
+
         Debug.Log(count);
     }
     
-    int GetCharacters(string name)
-    {
-        return name.Length;
-    }
+    //int GetCharacters(string name)
+    //{
+    //    return name.Length;
+    //}
 
 }
